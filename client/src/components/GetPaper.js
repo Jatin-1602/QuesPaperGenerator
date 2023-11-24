@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+// import {Link, Redirect} from 'react-router-dom'
 
 const GetPaper = () => {
   const navigate = useNavigate();
-  const [data, setData] = useState({});
 
   const [details, setDetails] = useState({
     difficult: "",
@@ -38,14 +38,13 @@ const GetPaper = () => {
         }),
       });
 
-      const questions = await res.json();
-      console.log(questions);
+      let questions = await res.json();
+      // console.log(questions);
 
-      //   setData(questions);
-      //   console.log(data);
+      navigate("/displayPaper", {state: {questions}});
+      
     } catch (error) {
-      console.log("Error in getting questions");
-      navigate("/");
+      console.log("Error in getting ques from database", error);
     }
   };
 
@@ -63,9 +62,6 @@ const GetPaper = () => {
             placeholder="Difficult Percentage"
             onChange={handleInputs}
           />
-          <small id="emailHelp" className="form-text text-muted">
-            We'll never share your email with anyone else.
-          </small>
         </div>
         <div className="form-group">
           <label htmlFor="medium">Medium Percentage</label>
@@ -104,7 +100,7 @@ const GetPaper = () => {
           />
         </div>
         <button type="submit" className="btn btn-primary" onClick={PostData}>
-          Login
+          GET Paper
         </button>
       </form>
     </>

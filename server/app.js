@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
   res.send("hello from server");
 });
 
-app.post("/addques", async (req, res) => {
+app.post("/addQues", async (req, res) => {
   const { ques, difficulty, score, addedBy } = req.body;
   if (!ques || !difficulty || !score) {
     console.log(req.body);
@@ -27,7 +27,7 @@ app.post("/addques", async (req, res) => {
   try {
     const newQues = new Ques({ ques, difficulty, score, addedBy });
     await newQues.save();
-    return res.status(200).json({ message: "Ques successfully added" });
+    return res.status(200).json({ message: "Ques successfully added", status: 200 });
   } catch (error) {
     console.log("Error in saving");
     return res.status(500).json({ message: "Failed to save", status: 500 });
